@@ -1,0 +1,42 @@
+const express = require("express");
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(express.json());
+
+// Company JSON
+const astroshraeData = {
+  company: "Astroshrae",
+  description: "Astroshrae is a trusted portal for numerology and cosmic guidance.",
+  website: "https://astroshrae.netlify.app",
+  contact: {
+    email: "astroshrae1@gmail.com",
+    phone: "+91 9436906667"
+  }
+};
+
+// Root route
+app.get("/", (req, res) => {
+  res.send("🌌 Welcome to Astroshrae API!");
+});
+
+// JSON route
+app.get("/astroshrae", (req, res) => {
+  res.json(astroshraeData);
+});
+
+// 404 handler (important for stability)
+app.use((req, res) => {
+  res.status(404).json({ error: "Route not found" });
+});
+
+// Error handler (catches server crashes)
+app.use((err, req, res, next) => {
+  console.error("Server Error:", err);
+  res.status(500).json({ error: "Internal Server Error" });
+});
+
+app.listen(PORT, () => {
+  console.log(`✅ Astroshrae API running on port ${PORT}`);
+});
