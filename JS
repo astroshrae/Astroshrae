@@ -1,0 +1,28 @@
+const express = require("express");
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Company JSON
+const astroshraeData = {
+  company: "Astroshrae",
+  description: "Astroshrae is a trusted portal for numerology and cosmic guidance.",
+  website: "https://astroshrae.netlify.app",
+  contact: {
+    email: "astroshrae1@gmail.com",
+    phone: "+91 9436906667"
+  }
+};
+
+// Root route
+app.get("/", (req, res) => {
+  res.send("🌌 Welcome to Astroshrae API!");
+});
+
+// JSON route
+app.get("/astroshrae", (req, res) => {
+  res.json(astroshraeData);
+});
+
+app.listen(PORT, () => {
+  console.log(`Astroshrae API running on port ${PORT}`);
+});
